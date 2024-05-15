@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+        * 
+        {
+            font-size: 30pt;
+        }
+
+        body {
+            /* กำหนดพื้นหลังเป็นภาพและปรับขนาดพื้นหลังให้เหมาะสม */
+            background-image: url("1.jpg");
+            background-size: cover; /* ปรับขนาดพื้นหลังให้ครอบคลุมพื้นที่ของ body ทั้งหมด */
+            /* background-size: contain; */ /* ปรับขนาดพื้นหลังให้ครอบคลุมพื้นที่ทั้งหมด โดยไม่เกินขอบเขต */
+            /* background-size: 50%; */ /* ปรับขนาดพื้นหลังให้เป็น 50% ของขนาดตัวเอกสาร */
+            /* background-size: 100px 200px; */ /* ปรับขนาดพื้นหลังให้มีขนาด 100px x 200px */
+            /* background-size: auto; */ /* ใช้ขนาดเดิมของภาพพื้นหลัง */
+            /* background-repeat: no-repeat; */ /* ไม่ให้ภาพพื้นหลังเกิดการเติมซ้ำ */
+        }
+
+        .pagemid 
+        {
+            position: relative;
+            padding-left: 38%;
+            padding-top: 28%;
+        }
+
+        button 
+        {
+            width: 50px;
+        }
+
+        .page2 {
+            padding-left: 70px;
+        }
+
+        #divide {
+            margin-left: 1px;
+        }
+
+        #textbox1 {
+            width: 362px;
+            margin-left: 70px;
+            background-color:cyan;
+        }
+
+        .page2 > button 
+        {
+            /* เพิ่มสไตล์ให้ปุ่มสามารถกำหนดสีพื้นหลังและสีตัวอักษรเมื่อ Hover ได้ */
+            background-color:lemonchiffon;
+            color: black;
+            border: none;
+        }
+
+        /*hover คือการเอาเม้าไปชี้แล้วเปลี่ยนเป็นสีอะไร*/
+        .page2 > button:hover 
+        {
+            background-color: orange;
+            /* เปลี่ยนสีเมื่อ Hover ให้เป็นสีส้ม */
+        }
+
+        .page2 > button:active 
+        {
+            /* ไม่ต้องเปลี่ยนสีเมื่อกดค้างไว้ (active) */
+            /* color: #3333; */
+        }
+
+        .page2 > button 
+        {
+            border: 2px solid #3333;
+            border-radius: 8px; /* เพิ่มขอบมน (rounded) */
+            padding: 5px; /* เพิ่มพื้นที่แนวนอนและแนวตั้งภายในปุ่ม */
+        }
+        
+    </style>
+    <script type="text/javascript" src="jquery-3.7.0.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function()
+        {
+            var show =0;
+            var hidden="";
+            var state="";
+            var state2="";
+            function numberpress(number)
+            {
+                show=$("#textbox1").val();
+                if(show==0||(state !="" && state2!="1"))
+                {
+                    show=number;
+                    if(state!="")
+                    {
+                        state2="1";
+                    }
+                }
+                else
+                {
+                    show=""+show+""+number;
+                }
+                $("#textbox1").val(show);
+            }
+            $(document).ready(function()
+            {
+                $("#0").click(function()
+                {
+                    numberpress("0");
+                });
+                $("#1").click(function()
+                {
+                    numberpress("1");
+                });
+                $("#2").click(function()
+                {
+                    numberpress("2");
+                });
+                $("#3").click(function()
+                {
+                    numberpress("3");
+                });
+                $("#4").click(function()
+                {
+                    numberpress("4");
+                });
+                $("#5").click(function()
+                {
+                    numberpress("5");
+                });
+                $("#6").click(function()
+                {
+                    numberpress("6");
+                });
+                $("#7").click(function()
+                {
+                    numberpress("7");
+                });
+                $("#8").click(function()
+                {
+                    numberpress("8");
+                });
+                $("#9").click(function()
+                {
+                    numberpress("9");
+                });
+                $("#plus").click(function()
+                {
+                    state="+";
+                    state2="";
+                    hidden=show;
+                });
+                $("#minus").click(function()
+                {
+                    state="-";
+                    state2="";
+                    hidden=show;
+                });
+                $("#multiply").click(function()
+                {
+                    state="*";
+                    state2="";
+                    hidden=show;
+                });
+                $("#divide").click(function()
+                {
+                    state="/";
+                    state2="";
+                    hidden=show;
+                });
+                $("#sqrt").click(function()
+                {
+                    state="root2";
+                    state2="";
+                    hidden=show;
+                });
+                $("#expo").click(function()
+                {
+                    state="x*x";
+                    state2="";
+                    hidden=show;
+                });
+                $("#equals").click(function()
+                {
+                    show=$("#textbox1").val();
+                    if(state=="+")
+                    {
+                        show=parseFloat(hidden)+parseFloat(show);
+                    }
+                    else if(state=="-")
+                    {
+                        show=parseFloat(hidden)-parseFloat(show);
+                    }
+                    else if(state=="*")
+                    {
+                        show=parseFloat(hidden)*parseFloat(show);
+                    }
+                    else if(state=="/")
+                    {
+                        show=parseFloat(hidden)/parseFloat(show);
+                    }
+                    else if(state=="root2")
+                    {
+                        if(state=="root2")
+                        {
+                            show = Math.sqrt(parseFloat(show));
+                        }
+                        else
+                        {
+                            show = Math.sqrt(parseFloat(hidden));
+                        }
+                        
+                    }
+                    else if(state=="x*x")
+                    {
+                        if(state=="x*x")
+                        {
+                            show = show=parseFloat(show)*parseFloat(show);
+                        }
+                        else
+                        {
+                            show = show=parseFloat(hidden)*parseFloat(hidden);
+                        }
+                    }
+                    state="";
+                    state2="";
+                    hidden="";
+                    $("#textbox1").val(show);
+                });
+                $("#backspace").click(function() 
+                {
+                    show = show.slice(0, -1);
+                    if (show === '' || show === '0') {
+                        show = "0";
+                    }
+                    $("#textbox1").val(show);
+                });
+                $("#textbox1").val(0);
+
+                $("#reset").click(function() 
+                {
+                    show = 0;
+                    hidden = "";
+                    state = "";
+                    state2 = "";
+                    $("#textbox1").val(show);
+                });
+                $("#textbox1").val(0);
+            });
+        });
+     
+    </script>
+</head>
+<body>
+    <div class="pagemid">
+        <input type="text" name="textbox1" id="textbox1" style="text-align: right;"/>
+        <br/>
+        <div class="page2">
+            <button id="7">7</button>
+            <button id="8">8</button>
+            <button id="9">9</button>
+            <button id="plus">+</button>
+            <button id="backspace" style="width: 130px;">Delete</button>
+            <br/>
+            <button id="4">4</button>
+            <button id="5">5</button>
+            <button id="6">6</button>
+            <button id="minus" style="width: 50px;">-</button>
+            <button id="reset" style="width: 130px">Reset</button>
+            <br/>
+            <button id="1">1</button>
+            <button id="2">2</button>
+            <button id="3">3</button>
+            <button id="multiply" style="width: 50px;">*</button>
+            <button id="sqrt" style="width: 130px;">root2</button>
+            <br/>
+            <button id="0">0</button>
+            <button id="equals" style="width: 110px;">=</button>
+            <button id="divide" style="width: 48px;" class="dd">/</button>
+            <button id="expo" style="width: 130px;">x*x</button>
+        </div>      
+    </div>
+    <br/>
+</body>
+</html>
